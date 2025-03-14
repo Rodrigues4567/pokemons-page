@@ -3,7 +3,7 @@ import styles from "./PokemonCard.module.css"
 // Function to extract the pokemon ID from URL
 const getPokemonId = (url: string) => {
     return url.split("/")[url.split("/").length - 2]
-  }
+}
 
 type PokemonCardProp = {
     pokemons: Record<string, string>[]
