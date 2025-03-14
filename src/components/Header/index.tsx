@@ -1,10 +1,15 @@
+import { ChangeEvent } from 'react'
 import styles from './Header.module.css'
 
-function Header() {
+type HeaderProp = {
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+function Header({ handleChange }: HeaderProp) {
     return (
         <div>
             <div className={styles.container}>
-                <input type="text" />
+                <input onChange={handleChange} type="text" />
             </div>
         </div>
     )

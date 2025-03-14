@@ -6,14 +6,14 @@ const getPokemonId = (url: string) => {
 }
 
 type PokemonCardProp = {
-    pokemons: Record<string, string>[]
+    filteredPokemons: Record<string, string>[]
 }
 
-function PokemonCard({ pokemons }: PokemonCardProp) {
+function PokemonCard({ filteredPokemons }: PokemonCardProp) {
     return (
         <div>
             <div className={styles.container}>
-                {pokemons.map((poke) => (
+                {filteredPokemons.map((poke) => (
                     <div key={poke.name} className={styles.card}>
                         <p>{poke.name}</p>
                         <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonId(poke.url)}.png`} alt={poke.name} />

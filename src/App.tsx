@@ -1,7 +1,7 @@
 import axios from 'axios'
 import './App.css'
 import PokemonCard from './components/PokemonCard'
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import Header from './components/Header'
 
 function App() {
@@ -12,18 +12,32 @@ function App() {
   }
 
   const [pokemons, setPokemons] = useState<PokemonsType[]>([])
+  const [input, setInput] = useState<string>('')
+  const [filteredPokemons, setFilteredPokemons] = useState<PokemonsType[]>([]);
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  // INPUT VALUE
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const inputValue = e.target.value.toLowerCase()
+    setInput(() => inputValue)
+    console.log(inputValue)
+  }
+
+  useEffect(() => {
+    const filtered = pokemons.filter((poke) =>
+      poke.name.toLowerCase().includes(input)
+    );
+    setFilteredPokemons(() => filtered);
+  }, [input, pokemons]);
 
   useEffect(() => {
     getPokeApi()
   }, [])
 
-  function getPokeApi() {
+  async function getPokeApi() {
     try {
-      axios.get("https://pokeapi.co/api/v2/pokemon?limit=120")
-      .then((res) => setPokemons(() => res.data.results))
-      .catch((err) => console.log(err))
+      const res = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=550")
+      setPokemons(() => res.data.results);
+      setFilteredPokemons(() => res.data.results)
     }
     catch (err) {
       console.log(err)
@@ -33,8 +47,8 @@ function App() {
   return (
     <>
       <h1>Página de pokemons!</h1>
-      <Header />
-      <PokemonCard pokemons={pokemons} />
+      <Header handleChange={handleChange} />
+      <PokemonCard filteredPokemons={filteredPokemons} />
     </>
   )
 }
