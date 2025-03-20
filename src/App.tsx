@@ -46,7 +46,6 @@ function App() {
 
   return (
     <>
-      <h1>Página de pokemons!</h1>
       <Header handleChange={handleChange} />
       <PokemonCard filteredPokemons={filteredPokemons} />
     </>

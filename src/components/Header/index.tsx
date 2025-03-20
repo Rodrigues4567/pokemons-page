@@ -9,7 +9,11 @@ function Header({ handleChange }: HeaderProp) {
     return (
         <div>
             <div className={styles.container}>
-                <input onChange={handleChange} type="text" />
+                <div className={styles.images_container}>
+                    <img className={styles.img_name} src="src/assets/pokemon-logo2.webp" alt="" />
+                </div>
+
+                <input onChange={handleChange} type="text" placeholder='Choose your Pokemon' />
             </div>
         </div>
     )

@@ -1,0 +1,35 @@
+
+@font-face {
+    font-family: 'regular';
+    src: url('./fonts/Poppins/Poppins-Regular.ttf');
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 6rem;
+    background-color: antiquewhite;
+    padding-bottom: 2.5rem;
+}
+
+.container input {
+    padding: 8px;
+    width: 310px;
+    font-size: 17px;
+    font-family: 'regular';
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.images_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.images_container .img_name {
+    height: 230px;
+}
