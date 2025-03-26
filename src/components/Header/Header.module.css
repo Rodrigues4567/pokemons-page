@@ -9,14 +9,14 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-bottom: 6rem;
     background-color: antiquewhite;
     padding-bottom: 2.5rem;
 }
 
 .container input {
-    padding: 8px;
+    padding: 9px;
     width: 310px;
     font-size: 17px;
     font-family: 'regular';

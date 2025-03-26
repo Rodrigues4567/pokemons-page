@@ -1,3 +1,4 @@
+import { PokemonsType } from "../../types"
 import styles from "./PokemonCard.module.css"
 
 // Function to extract the pokemon ID from URL
@@ -6,7 +7,7 @@ const getPokemonId = (url: string) => {
 }
 
 type PokemonCardProp = {
-    filteredPokemons: Record<string, string>[]
+    filteredPokemons: PokemonsType[];
 }
 
 function PokemonCard({ filteredPokemons }: PokemonCardProp) {

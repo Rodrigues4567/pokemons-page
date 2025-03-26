@@ -1,15 +1,10 @@
 import axios from 'axios'
 import './App.css'
-import PokemonCard from './components/PokemonCard'
 import { ChangeEvent, useEffect, useState } from 'react'
-import Header from './components/Header'
+import AppRoutes from './routes';
+import { PokemonsType } from './types';
 
 function App() {
-
-  type PokemonsType = {
-    name: string;
-    url : string;
-  }
 
   const [pokemons, setPokemons] = useState<PokemonsType[]>([])
   const [input, setInput] = useState<string>('')
@@ -22,6 +17,7 @@ function App() {
     console.log(inputValue)
   }
 
+  // FILTER POKEMONS BY INPUT
   useEffect(() => {
     const filtered = pokemons.filter((poke) =>
       poke.name.toLowerCase().includes(input)
@@ -35,7 +31,7 @@ function App() {
 
   async function getPokeApi() {
     try {
-      const res = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=550")
+      const res = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=555")
       setPokemons(() => res.data.results);
       setFilteredPokemons(() => res.data.results)
     }
@@ -46,8 +42,7 @@ function App() {
 
   return (
     <>
-      <Header handleChange={handleChange} />
-      <PokemonCard filteredPokemons={filteredPokemons} />
+      <AppRoutes handleChange={handleChange} filteredPokemons={filteredPokemons} />
     </>
   )
 }
