@@ -8,7 +8,6 @@ type PokemonDescriptionProp = {
 function PokemonDescription({ handleChange }: PokemonDescriptionProp) {
     return (
         <div>
-            {/* Remover o input-text quando essa página for chamada */}
             <Header handleChange={handleChange} />
             <h1>Página de descrição do pokemon</h1>
         </div>
