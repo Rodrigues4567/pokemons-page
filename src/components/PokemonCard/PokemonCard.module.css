@@ -16,6 +16,9 @@
     height: 170px;
     background-color: rgb(93, 197, 162);
     border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .card img {

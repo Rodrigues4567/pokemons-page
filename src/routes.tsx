@@ -15,7 +15,7 @@ function AppRoutes({ handleChange, filteredPokemons }: AppRoutesProp) {
             <Routes>
                 <Route path="/" element={<Home handleChange={handleChange} filteredPokemons={filteredPokemons} />}></Route>
 
-                <Route path="/PokemonDescription" element={<PokemonDescription handleChange={handleChange} />}></Route>
+                <Route path="/PokemonDescription/:name" element={<PokemonDescription handleChange={handleChange} />}></Route>
             </Routes>
         </BrowserRouter>
     )

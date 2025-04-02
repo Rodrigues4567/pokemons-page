@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { PokemonsType } from "../../types"
 import styles from "./PokemonCard.module.css"
 
@@ -15,10 +16,10 @@ function PokemonCard({ filteredPokemons }: PokemonCardProp) {
         <div>
             <div className={styles.container}>
                 {filteredPokemons.map((poke) => (
-                    <div key={poke.name} className={styles.card}>
+                    <Link key={poke.name} to={`/PokemonDescription/${poke.name}`} className={styles.card}>
                         <p>{poke.name}</p>
                         <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonId(poke.url)}.png`} alt={poke.name} />
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>
