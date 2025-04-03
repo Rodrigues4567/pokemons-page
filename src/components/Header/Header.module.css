@@ -18,7 +18,7 @@
 .container input {
     padding: 9px;
     width: 310px;
-    font-size: 17px;
+    font-size: 18px;
     font-family: 'regular';
     border-radius: 10px;
     border: 1px solid black;
@@ -31,6 +31,6 @@
 }
 
 .images_container .img_name {
-    height: 230px;
+    height: 220px;
     cursor: pointer;
 }

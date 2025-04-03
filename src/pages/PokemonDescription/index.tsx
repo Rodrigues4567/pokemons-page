@@ -1,7 +1,9 @@
+import styles from './PokemonDescription.module.css'
 import { ChangeEvent, useEffect, useState } from "react"
 import Header from "../../components/Header"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import { PokemonData } from '../../types'
 
 type PokemonDescriptionProp = {
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -9,14 +11,14 @@ type PokemonDescriptionProp = {
 
 function PokemonDescription({ handleChange }: PokemonDescriptionProp) {
 
-    const [pokemon, setPokemon] = useState<any>(null)
+    const [pokemon, setPokemon] = useState<PokemonData | null>(null)
     const { name } = useParams()
 
     useEffect(() => {
         async function getPokemon() {
             try {
                 const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-                //setPokemon(() => res.data)
+                setPokemon(() => res.data)
                 console.log(res.data)
             }
             catch(err) {
@@ -27,10 +29,29 @@ function PokemonDescription({ handleChange }: PokemonDescriptionProp) {
         getPokemon()
     }, [name])
 
+    if (!pokemon) return <p>Loading...</p>
+
     return (
         <div>
             <Header handleChange={handleChange} />
-            <h1>Página de descrição do pokemon</h1>
+            <div className={styles.container}>
+                <h2>{pokemon.name}</h2>
+                <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
+
+                <p>Type: {pokemon.types.map((t: { type: { name: string } }) => t.type.name).join(", ")}</p>
+                
+                <p>Abilities: {pokemon.abilities.map((item, index) => (
+                    <li key={index}>{item.ability.name}</li>
+                ))}</p>
+                
+                <ul>
+                    {pokemon.stats.map((item, index) => (
+                        <li key={index}>
+                            {item.stat.name.toUpperCase()}: {item.base_stat}
+                        </li>
+                    ))}
+                </ul>
+            </div>
 
         </div>
     )
