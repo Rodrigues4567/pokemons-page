@@ -1,4 +1,9 @@
 
+@font-face {
+    font-family: 'regular';
+    src: url('./fonts/Poppins/Poppins-Regular.ttf');
+}
+
 * {
     padding: 0px;
     margin: 0px;

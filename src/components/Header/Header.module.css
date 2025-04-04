@@ -1,18 +1,13 @@
 
-@font-face {
-    font-family: 'regular';
-    src: url('./fonts/Poppins/Poppins-Regular.ttf');
-}
-
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 6rem;
-    background-color: antiquewhite;
-    padding-bottom: 2.5rem;
+    margin-bottom: 5rem;
+    background-color: #F20505;
+    padding-bottom: 2rem;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.438);
 }
 
 .container input {
@@ -21,7 +16,7 @@
     font-size: 18px;
     font-family: 'regular';
     border-radius: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 .images_container {
@@ -31,6 +26,18 @@
 }
 
 .images_container .img_name {
-    height: 220px;
+    height: 210px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    
+    .images_container .img_name {
+        height: 180px;
+    }
+
+    .container input {
+        width: 290px;
+    }
+
 }

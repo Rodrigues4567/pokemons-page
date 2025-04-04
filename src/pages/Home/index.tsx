@@ -1,3 +1,4 @@
+import styles from './Home.module.css'
 import { ChangeEvent } from "react"
 import Header from "../../components/Header"
 import PokemonCard from "../../components/PokemonCard"
@@ -10,7 +11,7 @@ type HomeProp = {
 
 function Home({ handleChange, filteredPokemons }: HomeProp) {
     return (
-        <div>
+        <div className={styles.container}>
             <Header handleChange={handleChange} />
             <PokemonCard filteredPokemons={filteredPokemons} />
         </div>
