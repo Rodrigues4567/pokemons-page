@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'regular';
+    src: url('./fonts/Poppins/Poppins-Regular.ttf');
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'regular', sans-serif;
+}
+
+.desc {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 5rem;
+}
+
+img {
+    height: 9rem;
+}
+
+@media screen and (max-width: 500px) {
+    
+    .desc {
+        gap: 3.1rem;
+    }
+
+}

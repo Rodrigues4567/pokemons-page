@@ -24,7 +24,7 @@
 
 .card:hover {
     border: 2px solid #F20505;
-    transform: translate(6px, -6px);
+    transform: translate(5px, -5px);
     transition: transform 0.3s;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.226);
 }

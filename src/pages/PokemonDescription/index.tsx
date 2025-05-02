@@ -35,24 +35,31 @@ function PokemonDescription({ handleChange }: PokemonDescriptionProp) {
         <div>
             <Header handleChange={handleChange} />
             <div className={styles.container}>
+
                 <h2>{pokemon.name}</h2>
                 <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
+                <p><strong>Type:</strong> {pokemon.types.map((t: { type: { name: string } }) => t.type.name).join(", ")}</p>
 
-                <p>Type: {pokemon.types.map((t: { type: { name: string } }) => t.type.name).join(", ")}</p>
-                
-                <p>Abilities: {pokemon.abilities.map((item, index) => (
-                    <li key={index}>{item.ability.name}</li>
-                ))}</p>
-                
-                <ul>
-                    {pokemon.stats.map((item, index) => (
-                        <li key={index}>
-                            {item.stat.name.toUpperCase()}: {item.base_stat}
-                        </li>
-                    ))}
-                </ul>
+                <div className={styles.desc}>
+                    <div className={styles.type_abilities_container}>
+                        
+                        <div className={styles.abilities_container}>
+                            <p><strong>Abilities:</strong> {pokemon.abilities.map((item, index) => (
+                                <li key={index}>{item.ability.name}</li>
+                            ))}</p>
+                        </div>
+                    </div>
+                    
+                    <ul>
+                        {pokemon.stats.map((item, index) => (
+                            <li key={index}>
+                                {item.stat.name.toUpperCase()}: {item.base_stat}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
             </div>
-
         </div>
     )
 }
