@@ -23,7 +23,7 @@ function Header({ handleChange }: HeaderProp) {
                 </div>
 
                 {!hideInput && (
-                    <input onChange={handleChange} type="text" placeholder='Choose your Pokemon' />
+                    <input onChange={handleChange} type="text" placeholder='Choose your Pokémon' />
                 )}
             </div>
         </div>
