@@ -1,85 +1,53 @@
 import styles from './Home.module.css'
-import { ChangeEvent, useEffect, useRef, useState } from "react"
+import { ChangeEvent, useEffect, useRef } from "react"
 import Header from "../../components/Header"
 import PokemonCard from "../../components/PokemonCard"
 import { PokemonsType } from "../../types";
 
 type HomeProp = {
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    filteredPokemons: PokemonsType[];
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  filteredPokemons: PokemonsType[];
+  loadMorePokemons: () => void;
+  isLoading: boolean;
+  hasMore: boolean;
+  input: string;
 }
 
-function Home({ handleChange, filteredPokemons }: HomeProp) {
+function Home({ handleChange, filteredPokemons, loadMorePokemons, isLoading, hasMore, input }: HomeProp) {
 
-    // Quantos pokémons serão exibidos na tela
-    const [visibleCount, setVisibleCount] = useState<number>(10);
-    const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  const lastScrollY = useRef<number>(0);
 
-    const lastScrollY = useRef<number>(0);
+  // Infinite scroll baseado no scroll da página
+  useEffect(() => {
+    function handleScroll() {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    // Sempre que o filtro mudar, voltamos para o começo (10 primeiros)
-    useEffect(() => {
-        setVisibleCount(10);
-        lastScrollY.current = window.scrollY;
-    }, [filteredPokemons]);
+      const currentY = scrollTop;
+      const isScrollingDown = currentY > lastScrollY.current;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
 
-    const visiblePokemons = filteredPokemons.slice(0, visibleCount);
+      if (isScrollingDown && isAtBottom && hasMore && !isLoading && !input) {
+        loadMorePokemons();
+      }
 
-    function loadMore() {
-
-        if (isLoadingMore || visibleCount >= filteredPokemons.length) return;
-
-        setIsLoadingMore(true);
-
-        // Simula um loading
-        setTimeout(() => {
-            setVisibleCount((prev) => {
-                const next = prev + 10;
-                return next > filteredPokemons.length ? filteredPokemons.length : next;
-            });
-            setIsLoadingMore(false);
-        }, 400);
+      lastScrollY.current = currentY;
     }
 
-    // Infinite scroll: só carrega mais quando:
-    // - estiver rolando PRA BAIXO
-    // - chegar REALMENTE no final da página
-    useEffect(() => {
-        function handleScroll() {
-            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasMore, isLoading, loadMorePokemons, input]);
 
-            const currentY = scrollTop;
-            const isScrollingDown = currentY > lastScrollY.current;
+  return (
+    <div className={styles.container}>
+      <Header handleChange={handleChange} />
 
-            // chegou no final da página?
-            const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+      <PokemonCard filteredPokemons={filteredPokemons} />
 
-            if (isScrollingDown && isAtBottom) {
-                loadMore();
-            }
-
-            lastScrollY.current = currentY;
-        }
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [filteredPokemons.length, isLoadingMore]);
-
-    return (
-        <div className={styles.container}>
-            <Header handleChange={handleChange} />
-
-            <PokemonCard filteredPokemons={visiblePokemons} />
-
-            {isLoadingMore && (
-                <p className={styles.loadingText}>Carregando mais pokémons...</p>
-            )}
-
-            {!isLoadingMore && visibleCount >= filteredPokemons.length && (
-                <p className={styles.endText}>Você já viu todos os pokémons! 🎉</p>
-            )}
-        </div>
-    )
+      {isLoading && (
+        <p className={styles.loadingText}>Carregando mais pokémons...</p>
+      )}
+    </div>
+  )
 }
 
-export default Home
+export default Home;
