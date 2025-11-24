@@ -1,16 +1,36 @@
 # Pokémons Page
-O projeto Pokemons Page é uma aplicação web interativa que permite aos usuários explorar uma vasta coleção de Pokémon. Utilizando a PokéAPI como fonte de dados, a aplicação oferece funcionalidades como busca por nome, visualização de detalhes individuais de cada Pokémon, incluindo tipos, habilidades e status.
+Uma aplicação web feita em **React + TypeScript** que exibe uma lista de Pokémons consumida da **PokeAPI**, com:
 
-## Tecnologias usadas
-☑️ React.js
+- **Scroll infinito real** (carrega os Pokémons aos poucos conforme o usuário rola a página).
 
-☑️ Typescript
+- **Busca dinâmica por nome** (incluindo Pokémons que ainda não foram carregados).
 
-☑️ Axios
+- **Carregamento paginado** (limitando requisições para manter a página leve).
 
-☑️ React Router
+- **Renderização rápida e otimizada.**
 
-☑️ PokeAPI
+- **Descrição individual de cada Pokémon ao clicar no card.**
+
+## 🚀 Tecnologias utilizadas
+### Frontend
+
+- React.js
+
+- TypeScript
+
+- React Router DOM
+
+- CSS Modules
+
+- Axios
+
+### API
+
+- [PokeAPI](https://pokeapi.co/)
+
+## 🔗 Link para o deploy
+
+- https://pokemons-page.vercel.app/
 
 ## Imagens
 
